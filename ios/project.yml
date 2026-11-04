@@ -1,0 +1,37 @@
+# Generate AnkiOS.xcodeproj with `xcodegen` (run by scripts/bootstrap.sh).
+name: AnkiOS
+options:
+  bundleIdPrefix: dev.ankios
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+
+packages:
+  AnkiKit:
+    path: AnkiKit
+
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    # Set your team in Xcode, or export DEVELOPMENT_TEAM before running xcodegen.
+    DEVELOPMENT_TEAM: ${DEVELOPMENT_TEAM}
+
+targets:
+  AnkiOS:
+    type: application
+    platform: iOS
+    sources:
+      - path: App
+    dependencies:
+      - package: AnkiKit
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.ankios.app
+        TARGETED_DEVICE_FAMILY: "1,2"
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Anki
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+        # The Rust staticlib is large; dead-strip what's unused.
+        DEAD_CODE_STRIPPING: YES
