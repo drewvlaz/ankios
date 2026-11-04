@@ -1,0 +1,20 @@
+[package]
+name = "ankibridge"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+description = "C ABI over Anki's Rust backend for the iOS app"
+
+[lib]
+crate-type = ["staticlib", "rlib"]
+
+[dependencies]
+anki.workspace = true
+anki_proto.workspace = true
+prost.workspace = true
+
+[dev-dependencies]
+anki_proto_gen.workspace = true
+prost-reflect.workspace = true
+tokio = { version = "1.45", features = ["rt-multi-thread", "net", "macros", "signal"] }

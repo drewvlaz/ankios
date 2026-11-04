@@ -1,0 +1,10 @@
+module AnkiBridgeFFI {
+    header "ankibridge.h"
+    // System dependencies of the Rust static library (native-tls, reqwest's
+    // proxy detection, DNS). The library itself is linked by the XCFramework.
+    link framework "Security"
+    link framework "SystemConfiguration"
+    link framework "CoreFoundation"
+    link "resolv"
+    export *
+}

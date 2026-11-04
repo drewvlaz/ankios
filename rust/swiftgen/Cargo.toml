@@ -1,0 +1,15 @@
+[package]
+name = "swiftgen"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+description = "Generates Swift RPC stubs whose service/method indices match rslib"
+
+[dependencies]
+anki_proto_gen.workspace = true
+anyhow.workspace = true
+prost-reflect.workspace = true
+# Not used directly; depending on it forces its build script to run, which
+# produces the descriptor set at $DESCRIPTORS_BIN.
+anki_proto.workspace = true

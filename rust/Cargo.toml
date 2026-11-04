@@ -1,0 +1,26 @@
+[workspace]
+members = ["ankibridge", "swiftgen"]
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+license = "AGPL-3.0-or-later"
+publish = false
+
+# Versions here must stay compatible with vendor/anki/Cargo.toml. Cargo.lock was
+# seeded from vendor/anki/Cargo.lock so the dependency graph matches upstream.
+[workspace.dependencies]
+anki = { path = "../vendor/anki/rslib", features = ["native-tls"] }
+anki_proto = { path = "../vendor/anki/rslib/proto" }
+anki_proto_gen = { path = "../vendor/anki/rslib/proto_gen" }
+anyhow = "1.0.98"
+prost = "0.13"
+prost-reflect = "0.14.7"
+
+[profile.release]
+# Keep panics unwinding so the FFI layer can turn them into errors instead of
+# aborting the app.
+panic = "unwind"
+lto = "thin"
+codegen-units = 1
+strip = "debuginfo"
