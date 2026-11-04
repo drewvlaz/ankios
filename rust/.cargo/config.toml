@@ -1,0 +1,6 @@
+[env]
+# anki_proto's build script writes the compiled descriptor set here; rslib's
+# build script and our swiftgen tool read it back. Keeping it at a fixed path
+# lets scripts/gen-swift.sh feed the exact same descriptors to protoc-gen-swift.
+DESCRIPTORS_BIN = { value = "target/anki_descriptors.bin", relative = true }
+IPHONEOS_DEPLOYMENT_TARGET = "17.0"
